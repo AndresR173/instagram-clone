@@ -1,3 +1,4 @@
+import 'package:fakestagram/widgets/post.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/story.dart';
@@ -15,12 +16,12 @@ class _HomePageState extends State<HomePage> {
     return Container(
       color: Colors.black,
       child: ListView.builder(
-          itemCount: 10,
+          itemCount: 6,
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return _buildStoryFeed();
             } else {
-              return Container();
+              return Post(index: index - 1);
             }
           }),
     );
