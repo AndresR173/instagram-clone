@@ -1,5 +1,9 @@
+import 'package:fakestagram/bloc/time_line_bloc.dart';
+import 'package:fakestagram/bloc/time_line_event.dart';
+import 'package:fakestagram/bloc/time_line_state.dart';
 import 'package:fakestagram/pages/home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../utils/assets.dart';
 
@@ -57,7 +61,14 @@ class _NavigationPageState extends State<NavigationPage>
             body: TabBarView(
               controller: _tabController,
               children: [
-                HomePage(),
+                BlocProvider(
+                    create: (BuildContext context) {
+                      final bloc =
+                          TimeLineBloc(initialState: TimeLineState.initial());
+                      bloc.add(TimeLineEvent.loadContent());
+                      return bloc;
+                    },
+                    child: HomePage()),
                 Container(
                   color: Colors.blue,
                 ),

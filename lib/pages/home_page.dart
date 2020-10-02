@@ -1,6 +1,9 @@
-import 'package:fakestagram/widgets/post.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../bloc/time_line_bloc.dart';
+import '../bloc/time_line_state.dart';
+import '../widgets/post.dart';
 import '../widgets/story.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,15 +16,34 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    return BlocBuilder<TimeLineBloc, TimeLineState>(
+        builder: (BuildContext context, TimeLineState state) {
+      // loading publications
+      if (state.isInitialState) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      } // rendering publications
+      else if (state.status == Status.loaded) {
+        return _buildLoaded(context, state);
+      } else {
+        return _buildLoaded(context, state);
+      }
+    });
+  }
+
+  Container _buildLoaded(BuildContext context, TimeLineState state) {
     return Container(
       color: Colors.black,
       child: ListView.builder(
-          itemCount: 6,
+          itemCount: state.hasReachedEnd(3)
+              ? state.publications.length
+              : state.publications.length + 1,
           itemBuilder: (BuildContext context, int index) {
             if (index == 0) {
               return _buildStoryFeed();
             } else {
-              return Post(index: index - 1);
+              return Post(state.publications.elementAt(index - 1));
             }
           }),
     );
