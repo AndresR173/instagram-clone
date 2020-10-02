@@ -1,11 +1,13 @@
+import 'package:fakestagram/model/publication.dart';
 import 'package:fakestagram/widgets/likes.dart';
+import 'package:fakestagram/widgets/random_image.dart';
 import 'package:fakestagram/widgets/user_image.dart';
 import 'package:flutter/material.dart';
 
 class Post extends StatelessWidget {
-  final int index;
+  final Publication publication;
 
-  const Post({Key key, this.index}) : super(key: key);
+  Post(this.publication);
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +23,11 @@ class Post extends StatelessWidget {
                       Container(
                         padding: EdgeInsets.only(left: 15, right: 5),
                         child: UserImage(
-                            image: "assets/images/post/avatar.jpg",
+                            image: publication.avatarImage,
                             radio: 12,
                             width: 30),
                       ),
-                      Text("Account $index",
+                      Text(publication.accountName,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white)),
@@ -40,7 +42,7 @@ class Post extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.only(top: 10),
-              child: Image.asset("assets/images/post/post$index.jpg"),
+              child: RandomImage(media: publication.media),
             ),
             Row(
               children: <Widget>[
