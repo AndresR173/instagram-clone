@@ -1,3 +1,4 @@
+import 'package:fakestagram/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/assets.dart';
@@ -56,9 +57,7 @@ class _NavigationPageState extends State<NavigationPage>
             body: TabBarView(
               controller: _tabController,
               children: [
-                Container(
-                  color: Colors.red,
-                ),
+                HomePage(),
                 Container(
                   color: Colors.blue,
                 ),
