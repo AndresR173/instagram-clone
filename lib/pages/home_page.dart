@@ -7,18 +7,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black,
-      child: ListView.builder(
-          itemCount: 10,
-          itemBuilder: (BuildContext context, int index) {
-            if (index == 0) {
-              return _buildStoryFeed();
-            } else {
-              return Container();
-            }
-          }),
-    );
+    return Container(color: Colors.black, child: _buildStoryFeed());
   }
 
   Column _buildStoryFeed() {
