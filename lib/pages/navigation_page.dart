@@ -2,23 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 
-class NavigationPage extends StatefulWidget {
+class NavigationPage extends StatelessWidget {
   const NavigationPage({Key key}) : super(key: key);
 
-  @override
-  _NavigationPageState createState() => _NavigationPageState();
-}
-
-class _NavigationPageState extends State<NavigationPage>
-    with TickerProviderStateMixin {
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 5,
@@ -64,7 +50,6 @@ class _NavigationPageState extends State<NavigationPage>
               ],
             ),
             bottomNavigationBar: TabBar(
-              controller: _tabController,
               tabs: [
                 Tab(icon: Icon(Icons.add_link)),
                 Tab(icon: Icon(Icons.adb_outlined)),
