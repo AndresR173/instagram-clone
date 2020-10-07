@@ -6,14 +6,9 @@ import '../bloc/time_line_state.dart';
 import '../widgets/post.dart';
 import '../widgets/story.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key key}) : super(key: key);
 
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TimeLineBloc, TimeLineState>(
