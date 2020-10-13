@@ -21,7 +21,9 @@ class Story extends StatelessWidget {
               bottom: 4,
             ),
             child: UserImage(
-                image: 'assets/images/post/avatar.jpg', radio: 35, width: 75),
+                image: 'https://randomuser.me/api/portraits/med/men/6.jpg',
+                radio: 35,
+                width: 75),
           ),
           Text(
             "user $index",

@@ -14,12 +14,15 @@ dependencies:
   flutter_bloc: ^6.0.5
   freezed_annotation: ^0.11.0
   rxdart: ^0.24.0
+  dio: 3.0.10
+  json_annotation: ^3.0.0
 
 dev_dependencies:
   freezed: ^0.11.6
   build_runner: ^1.10.1
   flutter_test:
     sdk: flutter
+  json_serializable: ^3.2.0
 
 flutter:
   uses-material-design: true
