@@ -7,13 +7,14 @@ import 'time_line_event.dart';
 import 'package:rxdart/rxdart.dart';
 
 class TimeLineBloc extends Bloc<TimeLineEvent, TimeLineState> {
-  PublicationRepository repo = PublicationRepository();
+  final PublicationRepository publicationRepository;
   final int pageSize;
 
-  TimeLineBloc({
-    this.pageSize = 10,
-    TimeLineState initialState,
-  }) : super(initialState);
+  TimeLineBloc(
+      {this.pageSize = 10,
+      TimeLineState initialState,
+      this.publicationRepository})
+      : super(initialState);
 
   @override
   Stream<TimeLineState> mapEventToState(TimeLineEvent event) async* {
@@ -23,8 +24,8 @@ class TimeLineBloc extends Bloc<TimeLineEvent, TimeLineState> {
 
       yield state.copyWith(status: Status.loading);
 
-      List<Publication> publications =
-          await repo.getPublications(page: state.currentPage, limit: pageSize);
+      List<Publication> publications = await publicationRepository
+          .getPublications(page: state.currentPage, limit: pageSize);
 
       final updatedState = state.copyWith(
           publications: state.publications + publications,

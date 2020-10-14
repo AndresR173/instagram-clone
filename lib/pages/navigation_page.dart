@@ -2,6 +2,7 @@ import 'package:fakestagram/bloc/time_line_bloc.dart';
 import 'package:fakestagram/bloc/time_line_event.dart';
 import 'package:fakestagram/bloc/time_line_state.dart';
 import 'package:fakestagram/pages/home_page.dart';
+import 'package:fakestagram/repository/publication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -63,8 +64,9 @@ class _NavigationPageState extends State<NavigationPage>
               children: [
                 BlocProvider(
                     create: (BuildContext context) {
-                      final bloc =
-                          TimeLineBloc(initialState: TimeLineState.initial());
+                      final bloc = TimeLineBloc(
+                          initialState: TimeLineState.initial(),
+                          publicationRepository: PublicationRepository());
                       bloc.add(TimeLineEvent.loadContent());
                       return bloc;
                     },
