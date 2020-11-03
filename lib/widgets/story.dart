@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 import 'user_image.dart';
@@ -8,6 +10,7 @@ class Story extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final random = Random();
     return Container(
       width: 100,
       child: Column(
@@ -21,7 +24,8 @@ class Story extends StatelessWidget {
               bottom: 4,
             ),
             child: UserImage(
-                image: 'https://randomuser.me/api/portraits/med/men/6.jpg',
+                image:
+                    'https://randomuser.me/api/portraits/med/men/${random.nextInt(40)}.jpg',
                 radio: 35,
                 width: 75),
           ),
