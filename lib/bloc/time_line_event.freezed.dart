@@ -18,7 +18,7 @@ class _$TimeLineEventTearOff {
   }
 }
 
-// ignore: unused_element
+// ignore: unused_elementF
 const $TimeLineEvent = _$TimeLineEventTearOff();
 
 mixin _$TimeLineEvent {

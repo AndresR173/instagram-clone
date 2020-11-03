@@ -31,9 +31,7 @@ class UserImage extends StatelessWidget {
           height: width - 3,
         ),
         CircleAvatar(
-          radius: radio,
-          backgroundImage: AssetImage(image),
-        ),
+            radius: radio, backgroundImage: Image.network(image).image),
       ],
     );
   }

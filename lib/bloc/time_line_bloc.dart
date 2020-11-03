@@ -2,16 +2,16 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:fakestagram/bloc/time_line_state.dart';
 import 'package:fakestagram/model/publication.dart';
-import 'dart:math';
+import 'package:fakestagram/repository/publication_repository.dart';
 import 'time_line_event.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 class TimeLineBloc extends Bloc<TimeLineEvent, TimeLineState> {
+  PublicationRepository repo = PublicationRepository();
   final int pageSize;
 
   TimeLineBloc({
-    this.pageSize = 5,
+    this.pageSize = 10,
     TimeLineState initialState,
   }) : super(initialState);
 
@@ -23,8 +23,8 @@ class TimeLineBloc extends Bloc<TimeLineEvent, TimeLineState> {
 
       yield state.copyWith(status: Status.loading);
 
-      List<Publication> publications = await getPublications(
-          offset: state.currentPage * pageSize, limit: pageSize);
+      List<Publication> publications =
+          await repo.getPublications(page: state.currentPage, limit: pageSize);
 
       final updatedState = state.copyWith(
           publications: state.publications + publications,
@@ -45,23 +45,5 @@ class TimeLineBloc extends Bloc<TimeLineEvent, TimeLineState> {
       events.debounceTime(const Duration(milliseconds: 500)),
       transitionFn,
     );
-  }
-
-  Future<List<Publication>> getPublications({
-    @required int offset,
-    @required int limit,
-  }) async {
-    await Future.delayed(Duration(seconds: 1));
-    final publications =
-        List<Publication>.generate(limit, (index) => getPublication());
-    return publications;
-  }
-
-  Publication getPublication() {
-    Publication publication = Publication()
-      ..accountName = 'Endava'
-      ..avatarImage = 'assets/images/post/avatar.jpg'
-      ..media = 'https://picsum.photos/600?image=${Random().nextInt(80)}';
-    return publication;
   }
 }
